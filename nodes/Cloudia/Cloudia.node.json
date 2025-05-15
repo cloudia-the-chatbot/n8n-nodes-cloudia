@@ -1,0 +1,21 @@
+{
+    "node": "n8n-nodes-base.Cloudia",
+    "nodeVersion": "1.0",
+    "codexVersion": "1.0",
+    "categories": [
+        "Communication",
+        "Development"
+    ],
+    "resources": {
+        "credentialDocumentation": [
+            {
+                "url": "https://documenter.getpostman.com/view/33208544/2sA358eRmb"
+            }
+        ],
+        "primaryDocumentation": [
+            {
+                "url": "https://documenter.getpostman.com/view/33208544/2sA358eRmb"
+            }
+        ]
+    }
+}

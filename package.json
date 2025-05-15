@@ -1,19 +1,21 @@
 {
-  "name": "n8n-nodes-<...>",
+  "name": "n8n-nodes-cloudia",
   "version": "0.1.0",
-  "description": "",
+  "description": "Custom n8n node for Cloudia.",
   "keywords": [
-    "n8n-community-node-package"
+    "n8n-community-node-package",
+    "cloudia",
+    "cloudiabot"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://www.cloudia.com.br/",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Leandro César",
+    "url": "https://github.com/leandcesar"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "git+https://github.com/cloudia-the-chatbot/n8n-nodes-cloudia.git"
   },
   "engines": {
     "node": ">=18.10",
@@ -28,7 +30,7 @@
     "format": "prettier nodes credentials --write",
     "lint": "eslint nodes credentials package.json",
     "lintfix": "eslint nodes credentials package.json --fix",
-    "prepublishOnly": "pnpm build && pnpm lint -c .eslintrc.prepublish.js nodes credentials package.json"
+    "prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js nodes credentials package.json"
   },
   "files": [
     "dist"
@@ -36,12 +38,10 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
+      "dist/credentials/CloudiaApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/Cloudia/Cloudia.node.js"
     ]
   },
   "devDependencies": {
