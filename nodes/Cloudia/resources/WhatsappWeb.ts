@@ -171,6 +171,7 @@ export const whatsappWebFields: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		placeholder: 'Enter your filename...',
+		required: true,
 		displayOptions: {
 			show: {
 				operation: ['send-audio', 'send-document', 'send-image', 'send-video'],
@@ -315,10 +316,14 @@ export const whatsappWebBodyBuilders: Record<string, BodyBuilder> = {
 		name: ctx.getNodeParameter('additionalFields', i).customerName,
 		channelIntegrationId: ctx.getNodeParameter('additionalFields', i).channelIntegrationId,
 		messageType: 'option_list',
-		options: (ctx.getNodeParameter('options', i) as unknown as IDataObject[]).map((opt) => ({
-			title: opt.optionTitle,
-			description: opt.optionDescription,
-		})),
+		options: (
+			(ctx.getNodeParameter('options', i) as { property?: IDataObject[] })?.property?.map(
+				(option) => ({
+					title: option.optionTitle as string,
+					description: option.optionDescription as string,
+				})
+			) || []
+		),	
 	}),
 	'send-audio': (ctx, i) => ({
 		phone: ctx.getNodeParameter('customerPhoneNumber', i),
