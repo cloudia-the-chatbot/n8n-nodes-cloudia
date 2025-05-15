@@ -63,6 +63,15 @@ export const whatsappGupshupFields: INodeProperties[] = [
 		description: 'Fill this field if you are not using credentials',
 	},
 	{
+		displayName: 'Channel Integration ID',
+		name: 'channelIntegrationId',
+		type: 'number',
+		default: 0,
+		placeholder: '123',
+		required: true,
+		description: 'The channel integration ID to which to send the message',
+	},
+	{
 		displayName: 'Phone Number',
 		name: 'customerPhoneNumber',
 		type: 'string',
@@ -75,6 +84,15 @@ export const whatsappGupshupFields: INodeProperties[] = [
 			},
 		},
 		description: 'The phone number to which to send the message',
+	},
+	{
+		displayName: 'Name',
+		name: 'customerName',
+		type: 'string',
+		required: true,
+		default: '',
+		placeholder: 'Felipe Miranda',
+		description: 'Name of the customer to be sent',
 	},
 	{
 		displayName: 'Template ID',
@@ -208,24 +226,7 @@ export const whatsappGupshupFields: INodeProperties[] = [
 			},
 		},
 		default: {},
-		options: [
-			{
-				displayName: 'Channel Integration ID',
-				name: 'channelIntegrationId',
-				type: 'number',
-				default: 0,
-				placeholder: '123',
-				description: 'The channel integration ID to which to send the message',
-			},
-			{
-				displayName: 'Name',
-				name: 'customerName',
-				type: 'string',
-				default: '',
-				placeholder: 'Felipe Miranda',
-				description: 'Name of the customer to be sent',
-			},
-		],
+		options: [],
 	},
 ];
 
@@ -234,24 +235,28 @@ type BodyBuilder = (context: IExecuteFunctions, index: number) => IDataObject;
 export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	'send-text-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
-		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
-		channelIntegrationId: ctx.getNodeParameter('additionalFields', i).channelIntegrationId,
+		customerName: ctx.getNodeParameter('customerName', i),
+		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
-			params: (ctx.getNodeParameter('templateParams', i) as unknown as IDataObject[]).map(
-				(param) => param.templateParamValue,
-			),
+			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
+				? (ctx.getNodeParameter('templateParams', i) as any).property.map(
+						(opt: any) => opt.templateParamValue,
+					)
+				: [],
 		},
 	}),
 	'send-document-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
-		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
-		channelIntegrationId: ctx.getNodeParameter('additionalFields', i).channelIntegrationId,
+		customerName: ctx.getNodeParameter('customerName', i),
+		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
-			params: (ctx.getNodeParameter('templateParams', i) as unknown as IDataObject[]).map(
-				(param) => param.templateParamValue,
-			),
+			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
+				? (ctx.getNodeParameter('templateParams', i) as any).property.map(
+						(opt: any) => opt.templateParamValue,
+					)
+				: [],
 		},
 		attachment: {
 			type: 'document',
@@ -262,13 +267,15 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	}),
 	'send-image-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
-		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
-		channelIntegrationId: ctx.getNodeParameter('additionalFields', i).channelIntegrationId,
+		customerName: ctx.getNodeParameter('customerName', i),
+		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
-			params: (ctx.getNodeParameter('templateParams', i) as unknown as IDataObject[]).map(
-				(param) => param.templateParamValue,
-			),
+			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
+				? (ctx.getNodeParameter('templateParams', i) as any).property.map(
+						(opt: any) => opt.templateParamValue,
+					)
+				: [],
 		},
 		attachment: {
 			type: 'image',
@@ -279,13 +286,15 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	}),
 	'send-video-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
-		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
-		channelIntegrationId: ctx.getNodeParameter('additionalFields', i).channelIntegrationId,
+		customerName: ctx.getNodeParameter('customerName', i),
+		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
-			params: (ctx.getNodeParameter('templateParams', i) as unknown as IDataObject[]).map(
-				(param) => param.templateParamValue,
-			),
+			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
+				? (ctx.getNodeParameter('templateParams', i) as any).property.map(
+						(opt: any) => opt.templateParamValue,
+					)
+				: [],
 		},
 		attachment: {
 			type: 'video',
@@ -296,13 +305,15 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	}),
 	'send-location-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
-		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
-		channelIntegrationId: ctx.getNodeParameter('additionalFields', i).channelIntegrationId,
+		customerName: ctx.getNodeParameter('customerName', i),
+		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
-			params: (ctx.getNodeParameter('templateParams', i) as unknown as IDataObject[]).map(
-				(param) => param.templateParamValue,
-			),
+			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
+				? (ctx.getNodeParameter('templateParams', i) as any).property.map(
+						(opt: any) => opt.templateParamValue,
+					)
+				: [],
 		},
 		attachment: {
 			type: 'location',
