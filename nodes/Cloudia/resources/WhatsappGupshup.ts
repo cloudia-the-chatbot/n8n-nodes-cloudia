@@ -241,8 +241,8 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 			id: ctx.getNodeParameter('templateId', i),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 				? (ctx.getNodeParameter('templateParams', i) as any).property.map(
-						(opt: any) => opt.templateParamValue,
-					)
+					(opt: any) => opt.templateParamValue,
+				)
 				: [],
 		},
 	}),
@@ -254,8 +254,8 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 			id: ctx.getNodeParameter('templateId', i),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 				? (ctx.getNodeParameter('templateParams', i) as any).property.map(
-						(opt: any) => opt.templateParamValue,
-					)
+					(opt: any) => opt.templateParamValue,
+				)
 				: [],
 		},
 		attachment: {
@@ -273,8 +273,8 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 			id: ctx.getNodeParameter('templateId', i),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 				? (ctx.getNodeParameter('templateParams', i) as any).property.map(
-						(opt: any) => opt.templateParamValue,
-					)
+					(opt: any) => opt.templateParamValue,
+				)
 				: [],
 		},
 		attachment: {
@@ -292,8 +292,8 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 			id: ctx.getNodeParameter('templateId', i),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 				? (ctx.getNodeParameter('templateParams', i) as any).property.map(
-						(opt: any) => opt.templateParamValue,
-					)
+					(opt: any) => opt.templateParamValue,
+				)
 				: [],
 		},
 		attachment: {
@@ -311,8 +311,8 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 			id: ctx.getNodeParameter('templateId', i),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 				? (ctx.getNodeParameter('templateParams', i) as any).property.map(
-						(opt: any) => opt.templateParamValue,
-					)
+					(opt: any) => opt.templateParamValue,
+				)
 				: [],
 		},
 		attachment: {
