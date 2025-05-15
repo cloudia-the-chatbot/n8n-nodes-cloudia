@@ -238,9 +238,10 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		channelIntegrationId: ctx.getNodeParameter('additionalFields', i).channelIntegrationId,
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
-			params: (ctx.getNodeParameter('templateParams', i) as unknown as IDataObject[]).map(
-				(param) => param.templateParamValue,
-			),
+			params:
+				(ctx.getNodeParameter('templateParams', i) as { property?: IDataObject[] })?.property?.map(
+					(param) => param.templateParamValue,
+				) || [],
 		},
 	}),
 	'send-document-template': (ctx, i) => ({
@@ -249,9 +250,10 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		channelIntegrationId: ctx.getNodeParameter('additionalFields', i).channelIntegrationId,
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
-			params: (ctx.getNodeParameter('templateParams', i) as unknown as IDataObject[]).map(
-				(param) => param.templateParamValue,
-			),
+			params:
+				(ctx.getNodeParameter('templateParams', i) as { property?: IDataObject[] })?.property?.map(
+					(param) => param.templateParamValue,
+				) || [],
 		},
 		attachment: {
 			type: 'document',
@@ -266,9 +268,10 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		channelIntegrationId: ctx.getNodeParameter('additionalFields', i).channelIntegrationId,
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
-			params: (ctx.getNodeParameter('templateParams', i) as unknown as IDataObject[]).map(
-				(param) => param.templateParamValue,
-			),
+			params:
+				(ctx.getNodeParameter('templateParams', i) as { property?: IDataObject[] })?.property?.map(
+					(param) => param.templateParamValue,
+				) || [],
 		},
 		attachment: {
 			type: 'image',
@@ -283,9 +286,10 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		channelIntegrationId: ctx.getNodeParameter('additionalFields', i).channelIntegrationId,
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
-			params: (ctx.getNodeParameter('templateParams', i) as unknown as IDataObject[]).map(
-				(param) => param.templateParamValue,
-			),
+			params:
+				(ctx.getNodeParameter('templateParams', i) as { property?: IDataObject[] })?.property?.map(
+					(param) => param.templateParamValue,
+				) || [],
 		},
 		attachment: {
 			type: 'video',
@@ -300,9 +304,10 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		channelIntegrationId: ctx.getNodeParameter('additionalFields', i).channelIntegrationId,
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
-			params: (ctx.getNodeParameter('templateParams', i) as unknown as IDataObject[]).map(
-				(param) => param.templateParamValue,
-			),
+			params:
+				(ctx.getNodeParameter('templateParams', i) as { property?: IDataObject[] })?.property?.map(
+					(param) => param.templateParamValue,
+				) || [],
 		},
 		attachment: {
 			type: 'location',
