@@ -316,14 +316,13 @@ export const whatsappWebBodyBuilders: Record<string, BodyBuilder> = {
 		name: ctx.getNodeParameter('additionalFields', i).customerName,
 		channelIntegrationId: ctx.getNodeParameter('additionalFields', i).channelIntegrationId,
 		messageType: 'option_list',
-		options: (
+		options:
 			(ctx.getNodeParameter('options', i) as { property?: IDataObject[] })?.property?.map(
 				(option) => ({
 					title: option.optionTitle as string,
 					description: option.optionDescription as string,
-				})
-			) || []
-		),	
+				}),
+			) || [],
 	}),
 	'send-audio': (ctx, i) => ({
 		phone: ctx.getNodeParameter('customerPhoneNumber', i),
