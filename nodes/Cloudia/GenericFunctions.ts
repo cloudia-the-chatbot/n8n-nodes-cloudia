@@ -23,6 +23,13 @@ export async function cloudiaApiRequest(
 		json: true,
 	};
 
+	if (xApiKey) {
+		options.headers = {
+			'x-api-key': xApiKey,
+		};
+		return this.helpers.request(options);
+	}
+
 	try {
 		const credentials = (await this.getCredentials('cloudiaApi')) as { xApiKey: string };
 		options.headers = {
@@ -30,12 +37,6 @@ export async function cloudiaApiRequest(
 		};
 		return this.helpers.requestWithAuthentication.call(this, 'cloudiaApi', options);
 	} catch {
-		if (xApiKey) {
-			options.headers = {
-				'x-api-key': xApiKey,
-			};
-			return this.helpers.request(options);
-		}
 		throw new NodeOperationError(
 			this.getNode(),
 			'No X-API-Key or credentials provided. Please configure credentials or provide a key.',

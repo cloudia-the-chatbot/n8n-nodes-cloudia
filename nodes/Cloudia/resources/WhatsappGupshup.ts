@@ -69,6 +69,11 @@ export const whatsappGupshupFields: INodeProperties[] = [
 		default: 0,
 		placeholder: '123',
 		required: true,
+		displayOptions: {
+			show: {
+				resource: ['whatsapp-gupshup'],
+			},
+		},
 		description: 'The channel integration ID to which to send the message',
 	},
 	{
@@ -92,6 +97,11 @@ export const whatsappGupshupFields: INodeProperties[] = [
 		required: true,
 		default: '',
 		placeholder: 'Felipe Miranda',
+		displayOptions: {
+			show: {
+				resource: ['whatsapp-gupshup'],
+			},
+		},
 		description: 'Name of the customer to be sent',
 	},
 	{
