@@ -91,20 +91,6 @@ export const whatsappGupshupFields: INodeProperties[] = [
 		description: 'The phone number to which to send the message',
 	},
 	{
-		displayName: 'Name',
-		name: 'customerName',
-		type: 'string',
-		required: true,
-		default: '',
-		placeholder: 'Felipe Miranda',
-		displayOptions: {
-			show: {
-				resource: ['whatsapp-gupshup'],
-			},
-		},
-		description: 'Name of the customer to be sent',
-	},
-	{
 		displayName: 'Template ID',
 		name: 'templateId',
 		type: 'string',
@@ -236,7 +222,16 @@ export const whatsappGupshupFields: INodeProperties[] = [
 			},
 		},
 		default: {},
-		options: [],
+		options: [
+			{
+				displayName: 'Name',
+				name: 'customerName',
+				type: 'string',
+				default: '',
+				placeholder: 'Felipe Miranda',
+				description: 'Name of the customer to be sent',
+			},
+		],
 	},
 ];
 
@@ -245,7 +240,7 @@ type BodyBuilder = (context: IExecuteFunctions, index: number) => IDataObject;
 export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	'send-text-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
-		customerName: ctx.getNodeParameter('customerName', i),
+		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
@@ -258,7 +253,7 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	}),
 	'send-document-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
-		customerName: ctx.getNodeParameter('customerName', i),
+		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
@@ -277,7 +272,7 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	}),
 	'send-image-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
-		customerName: ctx.getNodeParameter('customerName', i),
+		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
@@ -296,7 +291,7 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	}),
 	'send-video-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
-		customerName: ctx.getNodeParameter('customerName', i),
+		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
@@ -315,7 +310,7 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	}),
 	'send-location-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
-		customerName: ctx.getNodeParameter('customerName', i),
+		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
