@@ -325,8 +325,8 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 			location: {
 				name: ctx.getNodeParameter('locationName', i),
 				address: ctx.getNodeParameter('locationAddress', i),
-				longitude: ctx.getNodeParameter('locationLongitude', i),
-				latitude: ctx.getNodeParameter('locationLatitude', i),
+				longitude: String(ctx.getNodeParameter('locationLongitude', i)),
+				latitude: String(ctx.getNodeParameter('locationLatitude', i)),
 			},
 		},
 	}),

@@ -17,31 +17,45 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Operations
 
-### Customer
-- [x] Assign user to customer
-- [x] Unassign user from customer
-- [x] Add tag to customer
-- [x] Remove tag from customer
+### Messages
+- [ ] Retrieve customers
+- [ ] Create customer
+- [ ] Retrieve conversations
+- [ ] Retrieve messages for a customer
+- [x] Whatsapp Web
+    - [x] Send text message
+    - [x] Send options list message
+    - [x] Send image message
+    - [x] Send video message
+    - [x] Send document message
+    - [x] Send audio message
+    - [x] Send location message
+    - [x] Send contact message
+- [x] Whatsapp Gupshup
+    - [x] Send text template message
+    - [x] Send image template message
+    - [x] Send video template message
+    - [x] Send document template message
+    - [x] Send location template message
+
+### Bot
+- [ ] Enable bot for customer
+- [ ] Disable bot for customer
+
+### Stage
+- [x] Update customer stage
+
+### Sequence
 - [x] Add customer to sequence
 - [x] Remove customer from sequence
-- [x] Update customer stage
-                
-### Whatsapp Gupshup
-- [x] Send document template message
-- [x] Send image template message
-- [x] Send location template message
-- [x] Send text template message
-- [x] Send video template message
-                
-### Whatsapp Web
-- [x] Send audio message
-- [x] Send contact message
-- [x] Send document message
-- [x] Send image message
-- [x] Send location message
-- [x] Send options list message
-- [x] Send text message
-- [x] Send video message
+
+### TAG
+- [x] Add tag to customer
+- [x] Remove tag from customer
+
+### Attendant
+- [x] Assign user to customer
+- [x] Unassign user from customer
 
 ## Credentials
 
