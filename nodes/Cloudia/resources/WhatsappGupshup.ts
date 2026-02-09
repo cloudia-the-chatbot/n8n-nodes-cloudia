@@ -231,6 +231,27 @@ export const whatsappGupshupFields: INodeProperties[] = [
 				placeholder: 'Felipe Miranda',
 				description: 'Name of the customer to be sent',
 			},
+			{
+				displayName: 'Sent by',
+				name: 'sentBy',
+				type: 'options',
+				options: [
+					{
+						name: 'Attendant',
+						value: 'human',
+					},
+					{
+						name: 'Bot',
+						value: 'bot',
+					},
+					{
+						name: 'System',
+						value: 'system',
+					},
+				],
+				default: ['bot'],
+				description: 'Indicates by whom the message should appear as sent',
+			},
 		],
 	},
 ];
@@ -241,6 +262,8 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	'send-text-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
 		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
+		sentByCloudia: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'bot',
+		sentBySystem: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'system',
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
@@ -254,6 +277,8 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	'send-document-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
 		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
+		sentByCloudia: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'bot',
+		sentBySystem: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'system',
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
@@ -273,6 +298,8 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	'send-image-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
 		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
+		sentByCloudia: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'bot',
+		sentBySystem: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'system',
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
@@ -292,6 +319,8 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	'send-video-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
 		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
+		sentByCloudia: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'bot',
+		sentBySystem: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'system',
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
@@ -311,6 +340,8 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	'send-location-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
 		customerName: ctx.getNodeParameter('additionalFields', i).customerName,
+		sentByCloudia: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'bot',
+		sentBySystem: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'system',
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
 			id: ctx.getNodeParameter('templateId', i),

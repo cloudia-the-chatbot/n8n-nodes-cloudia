@@ -307,7 +307,7 @@ export const whatsappWebFields: INodeProperties[] = [
 						value: 'human',
 					},
 					{
-						name: 'Robot',
+						name: 'Bot',
 						value: 'bot',
 					},
 					{
