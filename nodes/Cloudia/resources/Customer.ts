@@ -214,11 +214,15 @@ export const customerBodyBuilders: Record<string, BodyBuilder> = {
 	'unassign-user': (ctx, i) => ({
 		id_customer: ctx.getNodeParameter('customerId', i),
 	}),
-	'add-tag': (ctx, i) => ({
-		idtag: ctx.getNodeParameter('tagId', i),
-		name: ctx.getNodeParameter('tagName', i),
-		color: ctx.getNodeParameter('tagColor', i),
-	}),
+	'add-tag': (ctx, i) => {
+		const tagID = ctx.getNodeParameter('tagId', i);
+		const tagName = ctx.getNodeParameter('tagName', i);
+		const tagColor = ctx.getNodeParameter('tagColor', i);
+		return {
+			...(tagID ? (tagID !== 0 ? { tagID } : {}) : tagName ? { tagName } : {}),
+			tagColor,
+		};
+	},
 	'remove-tag': (ctx, i) => ({}),
 	'add-to-sequence': (ctx, i) => ({
 		customersIds: [ctx.getNodeParameter('customerId', i)],
