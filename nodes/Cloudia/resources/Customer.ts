@@ -215,12 +215,12 @@ export const customerBodyBuilders: Record<string, BodyBuilder> = {
 		id_customer: ctx.getNodeParameter('customerId', i),
 	}),
 	'add-tag': (ctx, i) => {
-		const tagID = ctx.getNodeParameter('tagId', i);
-		const tagName = ctx.getNodeParameter('tagName', i);
-		const tagColor = ctx.getNodeParameter('tagColor', i);
+		const idtag = ctx.getNodeParameter('tagId', i);
+		const name = ctx.getNodeParameter('tagName', i);
+		const color = ctx.getNodeParameter('tagColor', i);
 		return {
-			...(tagID ? (tagID !== 0 ? { tagID } : {}) : tagName ? { tagName } : {}),
-			tagColor,
+			...(idtag ? (idtag !== 0 ? { idtag } : {}) : name ? { name } : {}),
+			color,
 		};
 	},
 	'remove-tag': (ctx, i) => ({}),
