@@ -268,10 +268,10 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
-				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt) =>
+				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 					Array.isArray(opt.templateParamValue)
-					? opt.templateParamValue
-					: [opt.templateParamValue],
+						? opt.templateParamValue
+						: [opt.templateParamValue],
 				)
 				: [],
 		},
@@ -285,10 +285,10 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
-				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt) =>
+				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 					Array.isArray(opt.templateParamValue)
-					? opt.templateParamValue
-					: [opt.templateParamValue],
+						? opt.templateParamValue
+						: [opt.templateParamValue],
 				)
 				: [],
 		},
@@ -308,10 +308,10 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
-				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt) =>
+				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 					Array.isArray(opt.templateParamValue)
-					? opt.templateParamValue
-					: [opt.templateParamValue],
+						? opt.templateParamValue
+						: [opt.templateParamValue],
 				)
 				: [],
 		},
@@ -331,10 +331,10 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
-				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt) =>
+				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 					Array.isArray(opt.templateParamValue)
-					? opt.templateParamValue
-					: [opt.templateParamValue],
+						? opt.templateParamValue
+						: [opt.templateParamValue],
 				)
 				: [],
 		},
@@ -354,10 +354,10 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		template: {
 			id: ctx.getNodeParameter('templateId', i),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
-				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt) =>
+				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 					Array.isArray(opt.templateParamValue)
-					? opt.templateParamValue
-					: [opt.templateParamValue],
+						? opt.templateParamValue
+						: [opt.templateParamValue],
 				)
 				: [],
 		},
