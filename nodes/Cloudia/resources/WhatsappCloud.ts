@@ -24,12 +24,12 @@ export const whatsappCloudOperations: INodeProperties[] = [
 				description: 'Send image template message',
 				action: 'Send image template',
 			},
-			{
+			/* {
 				name: 'Send Location Template',
 				value: 'send-location-template',
 				description: 'Send location template message',
 				action: 'Send location template',
-			},
+			}, */
 			{
 				name: 'Send Text Template',
 				value: 'send-text-template',
