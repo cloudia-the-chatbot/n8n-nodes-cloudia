@@ -37,6 +37,18 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
     - [x] Send video template message
     - [x] Send document template message
     - [x] Send location template message
+- [x] Whatsapp Cloud
+    - [x] Send text template message
+    - [x] Send image template message
+    - [x] Send video template message
+    - [x] Send document template message
+    - [ ] Send audio template message
+    - [ ] Send location template message
+    - [ ] Send text message
+    - [ ] Send image message
+    - [ ] Send video message
+    - [ ] Send document message
+    - [ ] Send audio message
 
 ### Bot
 - [ ] Enable bot for customer

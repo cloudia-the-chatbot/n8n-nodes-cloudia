@@ -16,6 +16,12 @@ import {
 } from './resources/Customer';
 
 import {
+	whatsappCloudBodyBuilders,
+	whatsappCloudFields,
+	whatsappCloudOperations,
+} from './resources/WhatsappCloud';
+
+import {
 	whatsappGupshupBodyBuilders,
 	whatsappGupshupFields,
 	whatsappGupshupOperations,
@@ -52,11 +58,14 @@ export class Cloudia implements INodeType {
 					{ name: 'Customer', value: 'customer' },
 					{ name: 'Whatsapp Web', value: 'whatsapp-web' },
 					{ name: 'Whatsapp Gupshup', value: 'whatsapp-gupshup' },
+					{ name: 'Whatsapp Cloud', value: 'whatsapp-cloud' },
 				],
 				default: 'customer',
 			},
 			...customerOperations,
 			...customerFields,
+			...whatsappCloudOperations,
+			...whatsappCloudFields,
 			...whatsappGupshupOperations,
 			...whatsappGupshupFields,
 			...whatsappWebOperations,
@@ -84,6 +93,10 @@ export class Cloudia implements INodeType {
 					case 'whatsapp-gupshup':
 						url = 'send-gupshup-template';
 						buildBody = whatsappGupshupBodyBuilders[operation];
+						break;
+					case 'whatsapp-cloud':
+						url = 'messaging/whatsapp-cloud/template';
+						buildBody = whatsappCloudBodyBuilders[operation];
 						break;
 					case 'customer':
 						url = customerUrlBuilders[operation]?.(this, i);
