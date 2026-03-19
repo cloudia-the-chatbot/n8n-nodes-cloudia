@@ -1,6 +1,6 @@
 import type { IDataObject, IExecuteFunctions, INodeProperties } from 'n8n-workflow';
 
-export const WhatsappCloudOperations: INodeProperties[] = [
+export const whatsappCloudOperations: INodeProperties[] = [
 	{
 		displayName: 'Operation',
 		name: 'operation',
@@ -47,7 +47,7 @@ export const WhatsappCloudOperations: INodeProperties[] = [
 	},
 ];
 
-export const WhatsappCloudFields: INodeProperties[] = [
+export const whatsappCloudFields: INodeProperties[] = [
 	{
 		displayName: 'Cloudia API Key',
 		name: 'xApiKey',
@@ -287,7 +287,7 @@ export const WhatsappCloudFields: INodeProperties[] = [
 
 type BodyBuilder = (context: IExecuteFunctions, index: number) => IDataObject;
 
-export const WhatsappCloudBodyBuilders: Record<string, BodyBuilder> = {
+export const whatsappCloudBodyBuilders: Record<string, BodyBuilder> = {
 	'send-text-template': (ctx, i) => ({
 		customerId: ctx.getNodeParameter('customerId', i),
 		templateId: ctx.getNodeParameter('templateId', i),
