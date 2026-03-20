@@ -118,7 +118,7 @@ export class Cloudia implements INodeType {
 				const xApiKey = this.getNodeParameter('xApiKey', i) as string;
 				const response = await cloudiaApiRequest.call(this, 'POST', url, body, xApiKey);
 
-				returnData.push(response as IDataObject);
+				returnData.push(response ?? { success: true });
 			} catch (error) {
 				if (this.continueOnFail()) {
 					returnData.push({ error: error.message });
