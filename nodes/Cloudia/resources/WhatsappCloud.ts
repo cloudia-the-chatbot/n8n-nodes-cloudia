@@ -299,6 +299,7 @@ export const whatsappCloudBodyBuilders: Record<string, BodyBuilder> = {
 			)
 			: [],
 		sentBy: ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'BOT',
+		keepCurrentBotState: true,
 	}),
 	'send-document-template': (ctx, i) => ({
 		customerId: ctx.getNodeParameter('customerId', i),
@@ -314,6 +315,7 @@ export const whatsappCloudBodyBuilders: Record<string, BodyBuilder> = {
 		mediaUrl: ctx.getNodeParameter('mediaUrl', i),
 		mediaType: 'FILE',
 		fileName: ctx.getNodeParameter('fileName', i),
+		keepCurrentBotState: true,
 	}),
 	'send-image-template': (ctx, i) => ({
 		customerId: ctx.getNodeParameter('customerId', i),
@@ -328,6 +330,7 @@ export const whatsappCloudBodyBuilders: Record<string, BodyBuilder> = {
 		sentBy: ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'BOT',
 		mediaUrl: ctx.getNodeParameter('mediaUrl', i),
 		mediaType: 'IMAGE',
+		keepCurrentBotState: true,
 	}),
 	'send-video-template': (ctx, i) => ({
 		customerId: ctx.getNodeParameter('customerId', i),
@@ -342,6 +345,7 @@ export const whatsappCloudBodyBuilders: Record<string, BodyBuilder> = {
 		sentBy: ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'BOT',
 		mediaUrl: ctx.getNodeParameter('mediaUrl', i),
 		mediaType: 'VIDEO',
+		keepCurrentBotState: true,
 	}),
 	/* 'send-location-template': (ctx, i) => ({
 		customerId: ctx.getNodeParameter('customerId', i),
