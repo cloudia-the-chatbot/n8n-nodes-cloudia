@@ -24,12 +24,12 @@ export const whatsappCloudOperations: INodeProperties[] = [
 				description: 'Send image template message',
 				action: 'Send image template',
 			},
-			/* {
+			{
 				name: 'Send Location Template',
 				value: 'send-location-template',
 				description: 'Send location template message',
 				action: 'Send location template',
-			}, */
+			},
 			{
 				name: 'Send Text Template',
 				value: 'send-text-template',
@@ -180,7 +180,7 @@ export const whatsappCloudFields: INodeProperties[] = [
 		},
 		description: 'Document filename to be sent',
 	},
-	/* {
+	{
 		displayName: 'Address Name',
 		name: 'locationName',
 		type: 'string',
@@ -239,7 +239,7 @@ export const whatsappCloudFields: INodeProperties[] = [
 			},
 		},
 		description: 'Longitude location to be sent',
-	}, */
+	},
 	{
 		displayName: 'Additional Fields',
 		name: 'additionalFields',
@@ -347,7 +347,7 @@ export const whatsappCloudBodyBuilders: Record<string, BodyBuilder> = {
 		mediaType: 'VIDEO',
 		keepCurrentBotState: true,
 	}),
-	/* 'send-location-template': (ctx, i) => ({
+	'send-location-template': (ctx, i) => ({
 		customerId: ctx.getNodeParameter('customerId', i),
 		templateId: ctx.getNodeParameter('templateId', i),
 		templateParams: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
@@ -358,14 +358,12 @@ export const whatsappCloudBodyBuilders: Record<string, BodyBuilder> = {
 			)
 			: [],
 		sentBy: ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'BOT',
-		attachment: {
-			type: 'location',
-			location: {
-				name: ctx.getNodeParameter('locationName', i),
-				address: ctx.getNodeParameter('locationAddress', i),
-				longitude: String(ctx.getNodeParameter('locationLongitude', i)),
-				latitude: String(ctx.getNodeParameter('locationLatitude', i)),
-			},
+		location: {
+			name: ctx.getNodeParameter('locationName', i),
+			address: ctx.getNodeParameter('locationAddress', i),
+			longitude: String(ctx.getNodeParameter('locationLongitude', i)),
+			latitude: String(ctx.getNodeParameter('locationLatitude', i)),
 		},
-	}), */
+		keepCurrentBotState: true,
+	}),
 };
