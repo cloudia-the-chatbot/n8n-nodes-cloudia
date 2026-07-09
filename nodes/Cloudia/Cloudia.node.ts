@@ -1,6 +1,7 @@
 import type {
 	IDataObject,
 	IExecuteFunctions,
+	IHttpRequestMethods,
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
@@ -12,6 +13,7 @@ import {
 	customerBodyBuilders,
 	customerFields,
 	customerOperations,
+	customerRequestMethods,
 	customerUrlBuilders,
 } from './resources/Customer';
 
@@ -33,7 +35,7 @@ import {
 	whatsappWebOperations,
 } from './resources/WhatsappWeb';
 
-type BodyBuilder = (ctx: IExecuteFunctions, index: number) => IDataObject;
+type BodyBuilder = (ctx: IExecuteFunctions, index: number) => IDataObject | undefined;
 
 export class Cloudia implements INodeType {
 	description: INodeTypeDescription = {
@@ -83,6 +85,7 @@ export class Cloudia implements INodeType {
 				const operation = this.getNodeParameter('operation', i);
 
 				let url: string;
+				let method: IHttpRequestMethods = 'POST';
 				let buildBody: BodyBuilder | undefined;
 
 				switch (resource) {
@@ -100,6 +103,7 @@ export class Cloudia implements INodeType {
 						break;
 					case 'customer':
 						url = customerUrlBuilders[operation]?.(this, i);
+						method = customerRequestMethods[operation] ?? 'POST';
 						buildBody = customerBodyBuilders[operation];
 						break;
 					default:
@@ -116,7 +120,7 @@ export class Cloudia implements INodeType {
 
 				const body = buildBody(this, i);
 				const xApiKey = this.getNodeParameter('xApiKey', i) as string;
-				const response = await cloudiaApiRequest.call(this, 'POST', url, body, xApiKey);
+				const response = await cloudiaApiRequest.call(this, method, url, body, xApiKey);
 
 				returnData.push(response ?? { success: true });
 			} catch (error) {

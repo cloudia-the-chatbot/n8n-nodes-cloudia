@@ -18,7 +18,7 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 ## Operations
 
 ### Messages
-- [ ] Retrieve customers
+- [x] Retrieve customers
 - [ ] Create customer
 - [ ] Retrieve conversations
 - [ ] Retrieve messages for a customer
@@ -51,8 +51,8 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
     - [ ] Send audio message
 
 ### Bot
-- [ ] Enable bot for customer
-- [ ] Disable bot for customer
+- [x] Enable bot for customer
+- [x] Disable bot for customer
 
 ### Stage
 - [x] Update customer stage

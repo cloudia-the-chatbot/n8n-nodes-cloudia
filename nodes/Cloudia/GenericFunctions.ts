@@ -19,9 +19,12 @@ export async function cloudiaApiRequest(
 	const options: IRequestOptions = {
 		method,
 		uri,
-		body,
 		json: true,
 	};
+
+	if (body !== undefined) {
+		options.body = body;
+	}
 
 	if (xApiKey) {
 		options.headers = {

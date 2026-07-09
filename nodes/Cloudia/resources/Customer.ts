@@ -44,6 +44,12 @@ export const customerOperations: INodeProperties[] = [
 				action: 'Block customer',
 			},
 			{
+				name: 'List Customers',
+				value: 'list-contacts',
+				description: 'List customers by phone number or customer ID',
+				action: 'List customers',
+			},
+			{
 				name: 'Remove From Sequence',
 				value: 'remove-from-sequence',
 				description: 'Remove customer from sequence',
@@ -101,10 +107,78 @@ export const customerFields: INodeProperties[] = [
 		required: true,
 		displayOptions: {
 			show: {
+				operation: [
+					'assign-user',
+					'create-annotation',
+					'block',
+					'remove-tag',
+					'add-tag',
+					'add-to-sequence',
+					'remove-from-sequence',
+					'unassign-user',
+					'unblock',
+					'update-stage',
+				],
 				resource: ['customer'],
 			},
 		},
-		description: 'The customer ID to assign to the user',
+		description: 'The customer ID',
+	},
+	{
+		displayName: 'Search By',
+		name: 'searchBy',
+		type: 'options',
+		default: 'phoneNumber',
+		options: [
+			{
+				name: 'Phone Number',
+				value: 'phoneNumber',
+			},
+			{
+				name: 'Customer ID',
+				value: 'idCustomer',
+			},
+		],
+		displayOptions: {
+			show: {
+				operation: ['list-contacts'],
+				resource: ['customer'],
+			},
+		},
+		description: 'Choose whether to search by phone number or customer ID',
+	},
+	{
+		displayName: 'Phone Number',
+		name: 'phoneNumber',
+		type: 'string',
+		default: '',
+		placeholder: '5511988888888',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['list-contacts'],
+				searchBy: ['phoneNumber'],
+				resource: ['customer'],
+			},
+		},
+		description:
+			'The customer phone number using digits only, with area code. You can include or omit the country code and ninth digit',
+	},
+	{
+		displayName: 'Customer ID',
+		name: 'searchCustomerId',
+		type: 'number',
+		default: 0,
+		placeholder: '15031411',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['list-contacts'],
+				searchBy: ['idCustomer'],
+				resource: ['customer'],
+			},
+		},
+		description: 'The customer ID',
 	},
 	{
 		displayName: 'User ID',
@@ -241,7 +315,7 @@ export const customerFields: INodeProperties[] = [
 	},
 ];
 
-type BodyBuilder = (context: IExecuteFunctions, index: number) => IDataObject;
+type BodyBuilder = (context: IExecuteFunctions, index: number) => IDataObject | undefined;
 type UrlBuilder = (context: IExecuteFunctions, index: number) => string;
 
 export const customerUrlBuilders: Record<string, UrlBuilder> = {
@@ -250,12 +324,24 @@ export const customerUrlBuilders: Record<string, UrlBuilder> = {
 	'create-annotation': (ctx, i) => `annotations/${ctx.getNodeParameter('customerId', i)}`,
 	block: (ctx, i) => `customers/${ctx.getNodeParameter('customerId', i)}/block`,
 	unblock: (ctx, i) => `customers/${ctx.getNodeParameter('customerId', i)}/unblock`,
+	'list-contacts': (ctx, i) => {
+		const searchBy = ctx.getNodeParameter('searchBy', i) as string;
+		const value =
+			searchBy === 'phoneNumber'
+				? ctx.getNodeParameter('phoneNumber', i)
+				: ctx.getNodeParameter('searchCustomerId', i);
+		return `list-customers?${searchBy}=${encodeURIComponent(String(value))}`;
+	},
 	'add-tag': (ctx, i) => `assign_tag_to_customer/${ctx.getNodeParameter('customerId', i)}`,
 	'remove-tag': (ctx, i) =>
 		`unassign_tag_to_customer/${ctx.getNodeParameter('customerId', i)}?idtag=${ctx.getNodeParameter('tagId', i)}`,
 	'add-to-sequence': (ctx, i) => 'add_customers_to_sequence',
 	'remove-from-sequence': (ctx, i) => 'remove_customers_from_sequence',
 	'update-stage': (ctx, i) => `customers/${ctx.getNodeParameter('customerId', i)}/stage`,
+};
+
+export const customerRequestMethods: Record<string, 'GET' | 'POST'> = {
+	'list-contacts': 'GET',
 };
 
 export const customerBodyBuilders: Record<string, BodyBuilder> = {
@@ -273,6 +359,7 @@ export const customerBodyBuilders: Record<string, BodyBuilder> = {
 			...(markConversationAsUnread ? { markConversationAsUnread } : {}),
 		};
 	},
+	'list-contacts': () => undefined,
 	block: () => ({}),
 	unblock: () => ({}),
 	'add-tag': (ctx, i) => {
