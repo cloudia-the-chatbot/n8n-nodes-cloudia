@@ -32,6 +32,12 @@ export const customerOperations: INodeProperties[] = [
 				action: 'Assign user',
 			},
 			{
+				name: 'Add Annotation',
+				value: 'create-annotation',
+				description: 'Add annotation to customer conversation',
+				action: 'Add annotation',
+			},
+			{
 				name: 'Block',
 				value: 'block',
 				description: 'Block customer',
@@ -114,6 +120,37 @@ export const customerFields: INodeProperties[] = [
 			},
 		},
 		description: 'The user ID to assign to the customer',
+	},
+	{
+		displayName: 'Annotation',
+		name: 'annotation',
+		type: 'string',
+		default: '',
+		placeholder: 'Example with email mention: felipe@cloudia.com',
+		required: true,
+		typeOptions: {
+			rows: 4,
+		},
+		displayOptions: {
+			show: {
+				operation: ['create-annotation'],
+				resource: ['customer'],
+			},
+		},
+		description: 'The annotation to add to the customer conversation. Use the full user email to mention users',
+	},
+	{
+		displayName: 'Mark Conversation As Unread',
+		name: 'markConversationAsUnread',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				operation: ['create-annotation'],
+				resource: ['customer'],
+			},
+		},
+		description: 'Whether to mark the conversation as unread',
 	},
 	{
 		displayName: 'Tag ID',
@@ -210,6 +247,7 @@ type UrlBuilder = (context: IExecuteFunctions, index: number) => string;
 export const customerUrlBuilders: Record<string, UrlBuilder> = {
 	'assign-user': (ctx, i) => 'assign_user',
 	'unassign-user': (ctx, i) => 'unassign_user',
+	'create-annotation': (ctx, i) => `annotations/${ctx.getNodeParameter('customerId', i)}`,
 	block: (ctx, i) => `customers/${ctx.getNodeParameter('customerId', i)}/block`,
 	unblock: (ctx, i) => `customers/${ctx.getNodeParameter('customerId', i)}/unblock`,
 	'add-tag': (ctx, i) => `assign_tag_to_customer/${ctx.getNodeParameter('customerId', i)}`,
@@ -228,6 +266,13 @@ export const customerBodyBuilders: Record<string, BodyBuilder> = {
 	'unassign-user': (ctx, i) => ({
 		id_customer: ctx.getNodeParameter('customerId', i),
 	}),
+	'create-annotation': (ctx, i) => {
+		const markConversationAsUnread = ctx.getNodeParameter('markConversationAsUnread', i) as boolean;
+		return {
+			annotation: ctx.getNodeParameter('annotation', i),
+			...(markConversationAsUnread ? { markConversationAsUnread } : {}),
+		};
+	},
 	block: () => ({}),
 	unblock: () => ({}),
 	'add-tag': (ctx, i) => {
