@@ -19,9 +19,10 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ### Messages
 - [x] Retrieve customers
-- [ ] Create customer
+- [x] Create customer
 - [ ] Retrieve conversations
 - [ ] Retrieve messages for a customer
+- [x] Create annotation
 - [x] Whatsapp Web
     - [x] Send text message
     - [x] Send options list message
@@ -42,8 +43,7 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
     - [x] Send image template message
     - [x] Send video template message
     - [x] Send document template message
-    - [ ] Send audio template message
-    - [ ] Send location template message
+    - [x] Send location template message
     - [ ] Send text message
     - [ ] Send image message
     - [ ] Send video message

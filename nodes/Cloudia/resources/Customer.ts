@@ -38,6 +38,12 @@ export const customerOperations: INodeProperties[] = [
 				action: 'Add annotation',
 			},
 			{
+				name: 'Create Customer',
+				value: 'create-customer',
+				description: 'Create customer',
+				action: 'Create customer',
+			},
+			{
 				name: 'Block',
 				value: 'block',
 				description: 'Block customer',
@@ -181,6 +187,109 @@ export const customerFields: INodeProperties[] = [
 		description: 'The customer ID',
 	},
 	{
+		displayName: 'Name',
+		name: 'customerName',
+		type: 'string',
+		default: '',
+		placeholder: 'Felipe Miranda',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['create-customer'],
+				resource: ['customer'],
+			},
+		},
+		description: 'The customer name',
+	},
+	{
+		displayName: 'Channel Integration ID',
+		name: 'channelIntegrationId',
+		type: 'number',
+		default: 0,
+		placeholder: '1',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['create-customer'],
+				resource: ['customer'],
+			},
+		},
+		description: 'The channel integration ID',
+	},
+	{
+		displayName: 'Phone Number',
+		name: 'customerPhoneNumber',
+		type: 'string',
+		default: '',
+		placeholder: '5511999999999',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['create-customer'],
+				resource: ['customer'],
+			},
+		},
+		description: 'The customer phone number using digits only, with area code',
+	},
+	{
+		displayName: 'Observations',
+		name: 'customerObservations',
+		type: 'string',
+		default: '',
+		typeOptions: {
+			rows: 4,
+		},
+		displayOptions: {
+			show: {
+				operation: ['create-customer'],
+				resource: ['customer'],
+			},
+		},
+		description: 'Additional observations for the customer',
+	},
+	{
+		displayName: 'Birth Date',
+		name: 'customerBirthDate',
+		type: 'string',
+		default: '',
+		placeholder: '2024-12-30',
+		displayOptions: {
+			show: {
+				operation: ['create-customer'],
+				resource: ['customer'],
+			},
+		},
+		description: 'The customer birth date in YYYY-MM-DD format',
+	},
+	{
+		displayName: 'Email',
+		name: 'customerEmail',
+		type: 'string',
+		default: '',
+		placeholder: 'example@gmail.com',
+		displayOptions: {
+			show: {
+				operation: ['create-customer'],
+				resource: ['customer'],
+			},
+		},
+		description: 'The customer email address',
+	},
+	{
+		displayName: 'CPF',
+		name: 'customerCpf',
+		type: 'string',
+		default: '',
+		placeholder: '12341223412',
+		displayOptions: {
+			show: {
+				operation: ['create-customer'],
+				resource: ['customer'],
+			},
+		},
+		description: 'The customer CPF',
+	},
+	{
 		displayName: 'User ID',
 		name: 'userId',
 		type: 'number',
@@ -322,6 +431,7 @@ export const customerUrlBuilders: Record<string, UrlBuilder> = {
 	'assign-user': (ctx, i) => 'assign_user',
 	'unassign-user': (ctx, i) => 'unassign_user',
 	'create-annotation': (ctx, i) => `annotations/${ctx.getNodeParameter('customerId', i)}`,
+	'create-customer': () => 'customers/create',
 	block: (ctx, i) => `customers/${ctx.getNodeParameter('customerId', i)}/block`,
 	unblock: (ctx, i) => `customers/${ctx.getNodeParameter('customerId', i)}/unblock`,
 	'list-contacts': (ctx, i) => {
@@ -357,6 +467,22 @@ export const customerBodyBuilders: Record<string, BodyBuilder> = {
 		return {
 			annotation: ctx.getNodeParameter('annotation', i),
 			...(markConversationAsUnread ? { markConversationAsUnread } : {}),
+		};
+	},
+	'create-customer': (ctx, i) => {
+		const observations = ctx.getNodeParameter('customerObservations', i) as string;
+		const birthDate = ctx.getNodeParameter('customerBirthDate', i) as string;
+		const email = ctx.getNodeParameter('customerEmail', i) as string;
+		const cpf = ctx.getNodeParameter('customerCpf', i) as string;
+
+		return {
+			name: ctx.getNodeParameter('customerName', i),
+			channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
+			phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
+			...(observations ? { observations } : {}),
+			...(birthDate ? { birthDate } : {}),
+			...(email ? { email } : {}),
+			...(cpf ? { cpf } : {}),
 		};
 	},
 	'list-contacts': () => undefined,
