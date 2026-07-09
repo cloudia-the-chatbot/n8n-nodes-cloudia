@@ -32,6 +32,12 @@ export const customerOperations: INodeProperties[] = [
 				action: 'Assign user',
 			},
 			{
+				name: 'Block',
+				value: 'block',
+				description: 'Block customer',
+				action: 'Block customer',
+			},
+			{
 				name: 'Remove From Sequence',
 				value: 'remove-from-sequence',
 				description: 'Remove customer from sequence',
@@ -48,6 +54,12 @@ export const customerOperations: INodeProperties[] = [
 				value: 'unassign-user',
 				description: 'Unassign user from customer',
 				action: 'Unassign user',
+			},
+			{
+				name: 'Unblock',
+				value: 'unblock',
+				description: 'Unblock customer',
+				action: 'Unblock customer',
 			},
 			{
 				name: 'Update Stage',
@@ -198,6 +210,8 @@ type UrlBuilder = (context: IExecuteFunctions, index: number) => string;
 export const customerUrlBuilders: Record<string, UrlBuilder> = {
 	'assign-user': (ctx, i) => 'assign_user',
 	'unassign-user': (ctx, i) => 'unassign_user',
+	block: (ctx, i) => `customers/${ctx.getNodeParameter('customerId', i)}/block`,
+	unblock: (ctx, i) => `customers/${ctx.getNodeParameter('customerId', i)}/unblock`,
 	'add-tag': (ctx, i) => `assign_tag_to_customer/${ctx.getNodeParameter('customerId', i)}`,
 	'remove-tag': (ctx, i) =>
 		`unassign_tag_to_customer/${ctx.getNodeParameter('customerId', i)}?idtag=${ctx.getNodeParameter('tagId', i)}`,
@@ -214,6 +228,8 @@ export const customerBodyBuilders: Record<string, BodyBuilder> = {
 	'unassign-user': (ctx, i) => ({
 		id_customer: ctx.getNodeParameter('customerId', i),
 	}),
+	block: () => ({}),
+	unblock: () => ({}),
 	'add-tag': (ctx, i) => {
 		const idtag = ctx.getNodeParameter('tagId', i);
 		const name = ctx.getNodeParameter('tagName', i);
