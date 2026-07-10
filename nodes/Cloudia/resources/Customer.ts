@@ -14,6 +14,12 @@ export const customerOperations: INodeProperties[] = [
 		default: 'assign-user',
 		options: [
 			{
+				name: 'Add Annotation',
+				value: 'create-annotation',
+				description: 'Add annotation to customer conversation',
+				action: 'Add annotation',
+			},
+			{
 				name: 'Add Tag',
 				value: 'add-tag',
 				description: 'Add tag to customer',
@@ -32,22 +38,15 @@ export const customerOperations: INodeProperties[] = [
 				action: 'Assign user',
 			},
 			{
-				name: 'Add Annotation',
-				value: 'create-annotation',
-				description: 'Add annotation to customer conversation',
-				action: 'Add annotation',
-			},
-			{
-				name: 'Create Customer',
-				value: 'create-customer',
-				description: 'Create customer',
-				action: 'Create customer',
-			},
-			{
 				name: 'Block',
 				value: 'block',
 				description: 'Block customer',
 				action: 'Block customer',
+			},
+			{
+				name: 'Create Customer',
+				value: 'create-customer',
+				action: 'Create customer',
 			},
 			{
 				name: 'List Customers',
@@ -128,7 +127,6 @@ export const customerFields: INodeProperties[] = [
 				resource: ['customer'],
 			},
 		},
-		description: 'The customer ID',
 	},
 	{
 		displayName: 'Search By',
@@ -167,8 +165,7 @@ export const customerFields: INodeProperties[] = [
 				resource: ['customer'],
 			},
 		},
-		description:
-			'The customer phone number using digits only, with area code. You can include or omit the country code and ninth digit',
+		description: 'The customer phone number using digits only, with area code. You can include or omit the country code and ninth digit.',
 	},
 	{
 		displayName: 'Customer ID',
@@ -184,7 +181,6 @@ export const customerFields: INodeProperties[] = [
 				resource: ['customer'],
 			},
 		},
-		description: 'The customer ID',
 	},
 	{
 		displayName: 'Name',
@@ -214,7 +210,6 @@ export const customerFields: INodeProperties[] = [
 				resource: ['customer'],
 			},
 		},
-		description: 'The channel integration ID',
 	},
 	{
 		displayName: 'Phone Number',
@@ -320,7 +315,7 @@ export const customerFields: INodeProperties[] = [
 				resource: ['customer'],
 			},
 		},
-		description: 'The annotation to add to the customer conversation. Use the full user email to mention users',
+		description: 'The annotation to add to the customer conversation. Use the full user email to mention users.',
 	},
 	{
 		displayName: 'Mark Conversation As Unread',
