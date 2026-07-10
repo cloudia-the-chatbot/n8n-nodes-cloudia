@@ -465,6 +465,7 @@ export const customerBodyBuilders: Record<string, BodyBuilder> = {
 		};
 	},
 	'create-customer': (ctx, i) => {
+		const channelIntegrationId = Number(ctx.getNodeParameter('channelIntegrationId', i));
 		const observations = ctx.getNodeParameter('customerObservations', i) as string;
 		const birthDate = ctx.getNodeParameter('customerBirthDate', i) as string;
 		const email = ctx.getNodeParameter('customerEmail', i) as string;
@@ -472,7 +473,7 @@ export const customerBodyBuilders: Record<string, BodyBuilder> = {
 
 		return {
 			name: ctx.getNodeParameter('customerName', i),
-			channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
+			channelIntegrationId,
 			phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
 			...(observations ? { observations } : {}),
 			...(birthDate ? { birthDate } : {}),
