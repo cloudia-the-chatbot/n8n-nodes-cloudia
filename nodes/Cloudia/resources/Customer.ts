@@ -485,7 +485,8 @@ export const customerBodyBuilders: Record<string, BodyBuilder> = {
 	block: () => ({}),
 	unblock: () => ({}),
 	'add-tag': (ctx, i) => {
-		const idtag = ctx.getNodeParameter('tagId', i);
+		const rawIdtag = ctx.getNodeParameter('tagId', i);
+		const idtag = rawIdtag === '{}' ? null : rawIdtag;
 		const name = ctx.getNodeParameter('tagName', i);
 		const color = ctx.getNodeParameter('tagColor', i);
 		return {
