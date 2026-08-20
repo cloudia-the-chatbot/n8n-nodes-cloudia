@@ -290,7 +290,7 @@ type BodyBuilder = (context: IExecuteFunctions, index: number) => IDataObject;
 export const whatsappCloudBodyBuilders: Record<string, BodyBuilder> = {
 	'send-text-template': (ctx, i) => ({
 		customerId: ctx.getNodeParameter('customerId', i),
-		templateId: ctx.getNodeParameter('templateId', i),
+		templateId: String(ctx.getNodeParameter('templateId', i)),
 		templateParams: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 			? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 				Array.isArray(opt.templateParamValue)
@@ -303,7 +303,7 @@ export const whatsappCloudBodyBuilders: Record<string, BodyBuilder> = {
 	}),
 	'send-document-template': (ctx, i) => ({
 		customerId: ctx.getNodeParameter('customerId', i),
-		templateId: ctx.getNodeParameter('templateId', i),
+		templateId: String(ctx.getNodeParameter('templateId', i)),
 		templateParams: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 			? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 				Array.isArray(opt.templateParamValue)
@@ -319,7 +319,7 @@ export const whatsappCloudBodyBuilders: Record<string, BodyBuilder> = {
 	}),
 	'send-image-template': (ctx, i) => ({
 		customerId: ctx.getNodeParameter('customerId', i),
-		templateId: ctx.getNodeParameter('templateId', i),
+		templateId: String(ctx.getNodeParameter('templateId', i)),
 		templateParams: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 			? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 				Array.isArray(opt.templateParamValue)
@@ -334,7 +334,7 @@ export const whatsappCloudBodyBuilders: Record<string, BodyBuilder> = {
 	}),
 	'send-video-template': (ctx, i) => ({
 		customerId: ctx.getNodeParameter('customerId', i),
-		templateId: ctx.getNodeParameter('templateId', i),
+		templateId: String(ctx.getNodeParameter('templateId', i)),
 		templateParams: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 			? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 				Array.isArray(opt.templateParamValue)
@@ -349,7 +349,7 @@ export const whatsappCloudBodyBuilders: Record<string, BodyBuilder> = {
 	}),
 	'send-location-template': (ctx, i) => ({
 		customerId: ctx.getNodeParameter('customerId', i),
-		templateId: ctx.getNodeParameter('templateId', i),
+		templateId: String(ctx.getNodeParameter('templateId', i)),
 		templateParams: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 			? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 				Array.isArray(opt.templateParamValue)
