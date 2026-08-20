@@ -266,7 +266,7 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		sentBySystem: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'system',
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
-			id: ctx.getNodeParameter('templateId', i),
+			id: String(ctx.getNodeParameter('templateId', i)),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 					Array.isArray(opt.templateParamValue)
@@ -283,7 +283,7 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		sentBySystem: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'system',
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
-			id: ctx.getNodeParameter('templateId', i),
+			id: String(ctx.getNodeParameter('templateId', i)),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 					Array.isArray(opt.templateParamValue)
@@ -306,7 +306,7 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		sentBySystem: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'system',
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
-			id: ctx.getNodeParameter('templateId', i),
+			id: String(ctx.getNodeParameter('templateId', i)),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 					Array.isArray(opt.templateParamValue)
@@ -329,7 +329,7 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		sentBySystem: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'system',
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
-			id: ctx.getNodeParameter('templateId', i),
+			id: String(ctx.getNodeParameter('templateId', i)),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 					Array.isArray(opt.templateParamValue)
@@ -352,7 +352,7 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 		sentBySystem: (ctx.getNodeParameter('additionalFields', i)?.sentBy ?? 'bot') == 'system',
 		channelIntegrationId: ctx.getNodeParameter('channelIntegrationId', i),
 		template: {
-			id: ctx.getNodeParameter('templateId', i),
+			id: String(ctx.getNodeParameter('templateId', i)),
 			params: Array.isArray((ctx.getNodeParameter('templateParams', i) as any)?.property)
 				? (ctx.getNodeParameter('templateParams', i) as any).property.flatMap((opt: any) =>
 					Array.isArray(opt.templateParamValue)
