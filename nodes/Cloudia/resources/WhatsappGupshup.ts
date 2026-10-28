@@ -152,6 +152,54 @@ export const whatsappGupshupFields: INodeProperties[] = [
 		description: 'Media URL to be sent',
 	},
 	{
+		displayName: 'Button URL Type',
+		name: 'buttonUrlType',
+		type: 'options',
+		default: 'none',
+		displayOptions: {
+			show: {
+				resource: ['whatsapp-gupshup'],
+			},
+		},
+		options: [
+			{ name: 'None', value: 'none', description: 'Do not send button parameters' },
+			{ name: 'Static URL', value: 'static', description: 'Use the URL configured in the template' },
+			{ name: 'Dynamic URL', value: 'dynamic', description: 'Send dynamic URL button parameters' },
+		],
+		description: 'Optionally add URL button parameters to the template message',
+	},
+	{
+		displayName: 'Dynamic URL Button Parameters',
+		name: 'dynamicUrlButtonParameters',
+		type: 'fixedCollection',
+		typeOptions: { multipleValues: true },
+		default: {},
+		placeholder: 'Add Button Parameter',
+		displayOptions: {
+			show: {
+				buttonUrlType: ['dynamic'],
+				resource: ['whatsapp-gupshup'],
+			},
+		},
+		options: [
+			{
+				name: 'property',
+				displayName: 'Button Parameter',
+				values: [
+					{
+						displayName: 'URL Parameter Value',
+						name: 'value',
+						type: 'string',
+						default: '',
+						required: true,
+						description: 'Value to replace the dynamic part of the template button URL',
+					},
+				],
+			},
+		],
+		description: 'Adds dynamic URL button parameter values in the same order as the template buttons',
+	},
+	{
 		displayName: 'Address Name',
 		name: 'locationName',
 		type: 'string',
@@ -258,6 +306,25 @@ export const whatsappGupshupFields: INodeProperties[] = [
 
 type BodyBuilder = (context: IExecuteFunctions, index: number) => IDataObject;
 
+const getButtonParams = (ctx: IExecuteFunctions, i: number): IDataObject => {
+	const buttonUrlType = ctx.getNodeParameter('buttonUrlType', i) ?? 'none';
+
+	if (buttonUrlType === 'static') {
+		return { buttonParams: [] };
+	}
+
+	if (buttonUrlType === 'dynamic') {
+		const parameters = (ctx.getNodeParameter('dynamicUrlButtonParameters', i) as any)?.property;
+		return {
+			buttonParams: Array.isArray(parameters)
+				? parameters.map((param: any) => ({ type: 'URL', value: param.value }))
+				: [],
+		};
+	}
+
+	return {};
+};
+
 export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 	'send-text-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
@@ -275,6 +342,7 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 				)
 				: [],
 		},
+		...getButtonParams(ctx, i),
 	}),
 	'send-document-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
@@ -298,6 +366,7 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 				link: ctx.getNodeParameter('mediaUrl', i),
 			},
 		},
+		...getButtonParams(ctx, i),
 	}),
 	'send-image-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
@@ -321,6 +390,7 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 				link: ctx.getNodeParameter('mediaUrl', i),
 			},
 		},
+		...getButtonParams(ctx, i),
 	}),
 	'send-video-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
@@ -344,6 +414,7 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 				link: ctx.getNodeParameter('mediaUrl', i),
 			},
 		},
+		...getButtonParams(ctx, i),
 	}),
 	'send-location-template': (ctx, i) => ({
 		phoneNumber: ctx.getNodeParameter('customerPhoneNumber', i),
@@ -370,5 +441,6 @@ export const whatsappGupshupBodyBuilders: Record<string, BodyBuilder> = {
 				latitude: String(ctx.getNodeParameter('locationLatitude', i)),
 			},
 		},
+		...getButtonParams(ctx, i),
 	}),
 };

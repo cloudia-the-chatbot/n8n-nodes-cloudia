@@ -55,6 +55,7 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 - [x] Disable bot for customer
 
 ### Stage
+- [ ] Retrieve stages
 - [x] Update customer stage
 
 ### Sequence
